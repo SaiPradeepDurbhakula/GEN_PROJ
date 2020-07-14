@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="GEN_PROJ.GEN_HANA_DB.Features::CV_RANK" enforceSqlExecution="false" cacheInvalidationPeriod="NONE" outputViewType="Aggregation" schemaVersion="3.0" dataCategory="CUBE" applyPrivilegeType="NONE">
+<descriptions defaultDescription="CV_RANK"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="GEN_PROJ.GEN_HANA_DB.time_tables::M_TIME_DIMENSION_YEAR">
+    <resourceUri>GEN_PROJ.GEN_HANA_DB.time_tables::M_TIME_DIMENSION_YEAR</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:RankView" id="Rank_1">
+    <viewAttributes>
+      <viewAttribute id="YEAR"/>
+      <viewAttribute id="YEAR_INT" aggregationType="sum"/>
+      <viewAttribute id="IS_LEAP_YEAR" aggregationType="sum"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="GEN_PROJ.GEN_HANA_DB.time_tables::M_TIME_DIMENSION_YEAR"/>
+    <rankingFilter type="RANK" offset="0" offsetReference="FRONT" dynamicPartitionAttributes="false">
+      <partitionViewAttributeName id="YEAR"/>
+      <order byViewAttributeName="YEAR_INT" direction="DESC"/>
+      <rankThreshold>
+        <value>5</value>
+      </rankThreshold>
+      <rankViewAttributeName>Rank_Column</rankViewAttributeName>
+    </rankingFilter>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Rank_1">
+  <attributes>
+    <attribute id="YEAR" attributeHierarchyActive="false" displayAttribute="false" order="1">
+      <descriptions defaultDescription="YEAR"/>
+      <keyMapping columnObjectName="Rank_1" columnName="YEAR"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="YEAR_INT" aggregationType="sum" order="2" measureType="simple">
+      <descriptions defaultDescription="YEAR_INT"/>
+      <measureMapping columnName="YEAR_INT" columnObjectName="Rank_1"/>
+    </measure>
+    <measure id="IS_LEAP_YEAR" aggregationType="sum" order="3" measureType="simple">
+      <descriptions defaultDescription="IS_LEAP_YEAR"/>
+      <measureMapping columnName="IS_LEAP_YEAR" columnObjectName="Rank_1"/>
+    </measure>
+    <measure id="Rank_Column" aggregationType="sum" order="4" measureType="simple">
+      <descriptions defaultDescription="Rank_Column"/>
+      <measureMapping columnName="Rank_Column" columnObjectName="Rank_1"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectNameSpace="MeasureGroup" modelObjectName="Output">
+      <upperLeftCorner y="112" x="92"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectNameSpace="CalculationView" modelObjectName="Rank_1">
+      <upperLeftCorner y="217" x="92"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

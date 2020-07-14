@@ -1,0 +1,12 @@
+{
+	"role": {
+		"name": "GEN_PROJ.GEN_HANA_DB::ext_access",
+		"object_privileges": [
+			{
+				"name": "GEN_PROJ.GEN_HANA_DB.time_tables::M_TIME_DIMENSION_YEAR",
+				"type": "TABLE",
+				"privileges": [ "SELECT" ]
+			}
+			]
+	}
+}

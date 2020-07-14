@@ -1,0 +1,20 @@
+ID: GEN_PROJ
+_schema-version: '2.1'
+description: genpact Project
+version: 0.0.1
+
+modules:
+ - name: GEN_HANA_DB
+   type: hdb
+   path: GEN_HANA_DB
+   requires:
+    - name: hdi_GEN_HANA_DB
+
+resources:
+ - name: hdi_GEN_HANA_DB
+   parameters:
+      config:
+         schema: GENPACT_SCHEMA
+   properties:
+      hdi-container-name: ${service-name}
+   type: com.sap.xs.hdi-container

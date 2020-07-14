@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="GEN_PROJ.GEN_HANA_DB.Views::CV_RANK_ABS_OFFSET" enforceSqlExecution="false" cacheInvalidationPeriod="NONE" outputViewType="Aggregation" schemaVersion="3.0" dataCategory="CUBE" applyPrivilegeType="NONE">
+<descriptions defaultDescription="CV_RANK_ABS_OFFSET"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="GEN_PROJ.GEN_HANA_DB.time_tables::M_TIME_DIMENSION">
+    <resourceUri>GEN_PROJ.GEN_HANA_DB.time_tables::M_TIME_DIMENSION</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:RankView" id="Rank_1">
+    <viewAttributes>
+      <viewAttribute id="YEAR"/>
+      <viewAttribute id="MONTH"/>
+      <viewAttribute id="DATE_SAP"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="GEN_PROJ.GEN_HANA_DB.time_tables::M_TIME_DIMENSION"/>
+    <rankingFilter type="RANK" offset="2" offsetReference="FRONT" dynamicPartitionAttributes="false">
+      <partitionViewAttributeName id="YEAR"/>
+      <order byViewAttributeName="MONTH" direction="DESC"/>
+      <order byViewAttributeName="DATE_SAP" direction="DESC"/>
+      <rankThreshold>
+        <value>5</value>
+      </rankThreshold>
+      <rankViewAttributeName>Rank_Column</rankViewAttributeName>
+    </rankingFilter>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Rank_1">
+  <attributes>
+    <attribute id="YEAR" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="YEAR"/>
+      <keyMapping columnObjectName="Rank_1" columnName="YEAR"/>
+    </attribute>
+    <attribute id="MONTH" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MONTH"/>
+      <keyMapping columnObjectName="Rank_1" columnName="MONTH"/>
+    </attribute>
+    <attribute id="DATE_SAP" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DATE_SAP"/>
+      <keyMapping columnObjectName="Rank_1" columnName="DATE_SAP"/>
+    </attribute>
+    <attribute id="Rank_Column" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Rank_Column"/>
+      <keyMapping columnObjectName="Rank_1" columnName="Rank_Column"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures>
+    <measure id="CC_1" order="5" aggregationType="sum" measureType="simple" datatype="INTEGER" expressionLanguage="SQL">
+      <descriptions defaultDescription="CC"/>
+      <formula>1</formula>
+      </measure>
+  </calculatedMeasures>
+  <restrictedMeasures/>
+  <sortAttributes>
+    <sortAttribute id="YEAR" direction="DESC"/>
+  </sortAttributes>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectNameSpace="MeasureGroup" modelObjectName="Output">
+      <upperLeftCorner y="112" x="92"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Rank_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="92" y="217"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>
