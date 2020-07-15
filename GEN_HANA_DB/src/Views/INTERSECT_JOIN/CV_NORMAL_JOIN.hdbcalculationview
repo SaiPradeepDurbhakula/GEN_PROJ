@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="GEN_PROJ.GEN_HANA_DB.Views.INTERSECT_JOIN::CV_NORMAL_JOIN" applyPrivilegeType="NONE" dataCategory="DIMENSION" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="CV_NORMAL_JOIN"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="GEN_PROJ.GEN_HANA_DB.Views::CV_RANK_ABS_OFFSET">
+    <resourceUri>GEN_PROJ.GEN_HANA_DB.Views::CV_RANK_ABS_OFFSET</resourceUri>
+  </DataSource>
+  <DataSource id="GEN_PROJ.GEN_HANA_DB.time_tables::M_TIME_DIMENSION">
+    <resourceUri>GEN_PROJ.GEN_HANA_DB.time_tables::M_TIME_DIMENSION</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+    <viewAttributes>
+      <viewAttribute id="YEAR"/>
+      <viewAttribute id="MONTH"/>
+      <viewAttribute id="DATE_SAP"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="GEN_PROJ.GEN_HANA_DB.Views::CV_RANK_ABS_OFFSET"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_2">
+    <viewAttributes>
+      <viewAttribute id="YEAR"/>
+      <viewAttribute id="MONTH"/>
+      <viewAttribute id="DATE_SAP"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="GEN_PROJ.GEN_HANA_DB.time_tables::M_TIME_DIMENSION"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="CN_N" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="YEAR"/>
+      <viewAttribute hidden="true" id="JOIN$MONTH$MONTH"/>
+      <viewAttribute hidden="true" id="JOIN$DATE_SAP$DATE_SAP"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Projection_2">
+      <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$MONTH$MONTH" source="MONTH"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$DATE_SAP$DATE_SAP" source="DATE_SAP"/>
+    </input>
+    <input node="Projection_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$MONTH$MONTH" source="MONTH"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$DATE_SAP$DATE_SAP" source="DATE_SAP"/>
+    </input>
+    <joinAttribute name="YEAR"/>
+    <joinAttribute name="JOIN$MONTH$MONTH"/>
+    <joinAttribute name="JOIN$DATE_SAP$DATE_SAP"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="YEAR" attributeHierarchyActive="false" displayAttribute="false" order="1">
+      <descriptions defaultDescription="YEAR"/>
+      <keyMapping columnObjectName="Join_1" columnName="YEAR"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/></logicalModel>
+<layout>
+  <shapes>
+    <shape modelObjectName="Output" modelObjectNameSpace="MeasureGroup" expanded="true">
+      <upperLeftCorner x="221" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape modelObjectName="Projection_1" modelObjectNameSpace="CalculationView" expanded="true">
+      <upperLeftCorner x="92" y="356"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Projection_2" modelObjectNameSpace="CalculationView" expanded="true">
+      <upperLeftCorner x="302" y="356"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Join_1" modelObjectNameSpace="CalculationView" expanded="true">
+      <upperLeftCorner x="221" y="217"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Projection_2" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="143"/>
+    </shape>
+    <shape modelObjectName="Projection_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="143"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>
