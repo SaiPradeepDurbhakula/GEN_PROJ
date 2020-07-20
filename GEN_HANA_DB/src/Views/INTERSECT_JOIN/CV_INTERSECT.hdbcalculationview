@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="GEN_PROJ.GEN_HANA_DB.Views.INTERSECT_JOIN::CV_INTERSECT" applyPrivilegeType="NONE" dataCategory="DIMENSION" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="GEN_PROJ.GEN_HANA_DB.Views.INTERSECT_JOIN::CV_INTERSECT" enforceSqlExecution="false" cacheInvalidationPeriod="NONE" outputViewType="Projection" schemaVersion="3.0" dataCategory="DIMENSION" applyPrivilegeType="NONE">
 <descriptions defaultDescription="CV_NORMAL_JOIN"/>
 <localVariables/>
 <variableMappings/>
@@ -12,15 +12,14 @@
   </DataSource>
 </dataSources>
 <calculationViews>
-  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1" filterExpressionLanguage="SQL">
     <viewAttributes>
       <viewAttribute id="YEAR"/>
       <viewAttribute id="MONTH"/>
       <viewAttribute id="DATE_SAP"/>
     </viewAttributes>
     <calculatedViewAttributes/>
-    <input node="GEN_PROJ.GEN_HANA_DB.Views::CV_RANK_ABS_OFFSET"/>
-  </calculationView>
+    <input node="GEN_PROJ.GEN_HANA_DB.Views::CV_RANK_ABS_OFFSET"/></calculationView>
   <calculationView xsi:type="Calculation:ProjectionView" id="Projection_2">
     <viewAttributes>
       <viewAttribute id="YEAR"/>
@@ -32,9 +31,9 @@
   </calculationView>
   <calculationView xsi:type="Calculation:IntersectView" id="Intersect_1">
     <viewAttributes>
-      <viewAttribute id="YEAR"/>
-      <viewAttribute id="MONTH"/>
-      <viewAttribute id="DATE_SAP"/>
+      <viewAttribute id="YEAR" datatype="NVARCHAR" length="4"/>
+      <viewAttribute id="MONTH" datatype="NVARCHAR" length="2"/>
+      <viewAttribute id="DATE_SAP" datatype="NVARCHAR" length="8"/>
     </viewAttributes>
     <calculatedViewAttributes/>
     <input node="Projection_1">
@@ -51,7 +50,7 @@
 </calculationViews>
 <logicalModel id="Intersect_1">
   <attributes>
-    <attribute id="YEAR" order="1" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="YEAR" attributeHierarchyActive="false" displayAttribute="false" order="1">
       <descriptions defaultDescription="YEAR"/>
       <keyMapping columnObjectName="Intersect_1" columnName="YEAR"/>
     </attribute>
@@ -62,22 +61,22 @@
   <restrictedMeasures/></logicalModel>
 <layout>
   <shapes>
-    <shape modelObjectName="Output" modelObjectNameSpace="MeasureGroup" expanded="true">
-      <upperLeftCorner x="221.11302679000914" y="112"/>
+    <shape expanded="true" modelObjectNameSpace="MeasureGroup" modelObjectName="Output">
+      <upperLeftCorner y="112" x="221"/>
     
       <rectangleSize width="160"/>
     </shape>
   
-    <shape modelObjectName="Projection_1" modelObjectNameSpace="CalculationView" expanded="true">
-      <upperLeftCorner x="92.00000000000001" y="356.9999988079071"/>
+    <shape expanded="true" modelObjectNameSpace="CalculationView" modelObjectName="Projection_1">
+      <upperLeftCorner y="356" x="92"/>
       <rectangleSize height="30" width="160"/>
     </shape>
-    <shape modelObjectName="Projection_2" modelObjectNameSpace="CalculationView" expanded="true">
-      <upperLeftCorner x="302.00000000000005" y="356.9999988079071"/>
+    <shape expanded="true" modelObjectNameSpace="CalculationView" modelObjectName="Projection_2">
+      <upperLeftCorner y="356" x="302"/>
       <rectangleSize height="30" width="160"/>
     </shape>
-    <shape expanded="true" modelObjectName="Intersect_1" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="221.11302679000914" y="217"/>
+    <shape expanded="true" modelObjectNameSpace="CalculationView" modelObjectName="Intersect_1">
+      <upperLeftCorner y="217" x="221"/>
       <rectangleSize height="30" width="160"/>
     </shape>
   </shapes>
