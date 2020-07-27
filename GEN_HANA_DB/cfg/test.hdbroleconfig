@@ -1,0 +1,7 @@
+{
+  "test": {
+    "Ref1": {
+      "schema": "GENPACT_SCHEMA_1"
+    }
+  }
+}
